@@ -3,14 +3,13 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
-const NotFoundError = require('./errors/NotFoundError');
 const { reqLogger, errLogger } = require('./middlewares/logger');
 const routesUser = require('./routes/user');
 const routesMovie = require('./routes/movie');
 const { createUser, login } = require('./controllers/user');
 const auth = require('./middlewares/auth');
 const { corsUrl } = require('./constants/constants');
-const { OTHER_SEREVER_ERROR } = require('./constants/statusCodes');
+const { OTHER_SEREVER_ERROR, NotFoundError } = require('./constants/statusCodes');
 
 const app = express();
 
