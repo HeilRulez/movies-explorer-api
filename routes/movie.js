@@ -25,4 +25,4 @@ routes.delete('/:_id', celebrate({
   }),
 }), delMovie);
 
-module.express = routes;
+module.exports = routes;

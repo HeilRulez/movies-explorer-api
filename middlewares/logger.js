@@ -9,8 +9,8 @@ module.exports.reqLogger = expWin.logger({
 });
 
 module.exports.errLogger = expWin.errorLogger({
-  transport: [
-    new winston.transport.File({ filename: 'error.log' }),
+  transports: [
+    new winston.transports.File({ filename: 'error.log' }),
   ],
   format: winston.format.json(),
 });
