@@ -14,14 +14,15 @@ module.exports.getSaveMovie = async (req, res, next) => {
 
 module.exports.cerateMovie = async (req, res, next) => {
   const { movieId } = req.body;
+  let movie;
   try {
-    const movie = await Movie.findById(movieId);
+    movie = await Movie.findOne({ movieId });
     if (movie) {
       next(new ConflictError('Этот фильм уже добавлен.'));
       return;
     }
-    const newMovie = await Movie.create(req.body);
-    res.status(OK_ADD).send(newMovie);
+    movie = await Movie.create({ ...req.body, owner: req.user._id });
+    res.status(OK_ADD).send(movie);
   } catch (err) {
     next(err);
   }

@@ -56,7 +56,7 @@ const movieSchema = new mongoose.Schema({
     ref: 'user',
     required: [true, 'Не должно быть пустым'],
   },
-  movieID: {
+  movieId: {
     type: ObjectID,
     ref: 'movie',
     required: [true, 'Не должно быть пустым'],
