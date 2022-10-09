@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const User = require('../models/user');
-const { OK, OK_ADD, BadRequestError, UnauthorizedError, ConflictError, } = require('../constants/statusCodes');
+const {
+  OK, OK_ADD, BadRequestError, UnauthorizedError, ConflictError,
+} = require('../constants/statusCodes');
 
 module.exports.getUserInfo = async (req, res, next) => {
   try {
@@ -11,7 +13,7 @@ module.exports.getUserInfo = async (req, res, next) => {
     res.status(OK).send(user);
   } catch (err) {
     next(err);
-  };
+  }
 };
 
 module.exports.setUserInfo = async (req, res, next) => {
@@ -28,7 +30,7 @@ module.exports.setUserInfo = async (req, res, next) => {
       return;
     }
     next(err);
-  };
+  }
 };
 
 module.exports.createUser = async (req, res, next) => {
@@ -51,7 +53,7 @@ module.exports.createUser = async (req, res, next) => {
       return;
     }
     next(err);
-  };
+  }
 };
 
 module.exports.login = async (req, res, next) => {
@@ -91,5 +93,5 @@ module.exports.outUser = async (req, res, next) => {
       .send({});
   } catch (err) {
     next(err);
-  };
+  }
 };
