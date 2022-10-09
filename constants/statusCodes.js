@@ -2,6 +2,7 @@ const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const ConflictError = require('../errors/ConflictError');
+const ForbiddenError = require('../errors/ForbiddenError');
 
 module.exports = {
   OK: 200,
@@ -11,4 +12,5 @@ module.exports = {
   BadRequestError,
   UnauthorizedError,
   ConflictError,
+  ForbiddenError,
 };

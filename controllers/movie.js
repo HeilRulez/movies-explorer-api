@@ -1,6 +1,6 @@
 const Movie = require('../models/movie');
 const {
-  OK, OK_ADD, BadRequestError, NotFoundError, ConflictError,
+  OK, OK_ADD, BadRequestError, NotFoundError, ConflictError, ForbiddenError,
 } = require('../constants/statusCodes');
 
 module.exports.getSaveMovie = async (req, res, next) => {
@@ -30,10 +30,13 @@ module.exports.cerateMovie = async (req, res, next) => {
 
 module.exports.delMovie = async (req, res, next) => {
   try {
-    const movie = await Movie.findByIdAndDelete(req.params._id);
+    const movie = await Movie.findById(req.params._id);
     if (!movie) {
       throw new NotFoundError('Фильм отсутствут.');
+    } else if (req.user._id !== movie.owner) {
+      throw new ForbiddenError('Нет прав для данного действия.');
     }
+    await Movie.findByIdAndDelete(req.params._id);
     res.status(OK).send(movie);
   } catch (err) {
     if (err.name === 'CastError') {

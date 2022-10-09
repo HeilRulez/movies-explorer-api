@@ -52,8 +52,7 @@ const movieSchema = new mongoose.Schema({
     },
   },
   owner: {
-    type: ObjectID,
-    ref: 'user',
+    type: String,
     required: [true, 'Не должно быть пустым'],
   },
   movieId: {
