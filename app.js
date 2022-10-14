@@ -1,4 +1,4 @@
-const { NODE_ENV, DB_NAME } = process.env;
+const { NODE_ENV, DB_NAME, CORS_URL } = process.env;
 require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
@@ -6,7 +6,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const { reqLogger, errLogger } = require('./middlewares/logger');
 const routes = require('./routes/index');
-const { corsUrl } = require('./constants/constants');
 const errorHandler = require('./middlewares/errors');
 
 const app = express();
@@ -17,7 +16,7 @@ mongoose.connect(`mongodb://localhost:27017/${NODE_ENV === 'production' ? DB_NAM
 });
 app.use(helmet());
 app.use(cors({
-  origin: corsUrl,
+  origin: CORS_URL,
   credentials: true,
 }));
 app.use(express.json());

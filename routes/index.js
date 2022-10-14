@@ -7,7 +7,6 @@ const {
 const { getSaveMovie, cerateMovie, delMovie } = require('../controllers/movie');
 const auth = require('../middlewares/auth');
 const { NotFoundError } = require('../constants/statusCodes');
-const app = require('../app');
 
 routes.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -59,6 +58,6 @@ routes.use('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена.'));
 });
 
-app.use(errors());
+routes.use(errors());
 
 module.exports = routes;
