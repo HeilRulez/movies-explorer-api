@@ -5,7 +5,6 @@ const ConflictError = require('../errors/ConflictError');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 module.exports = {
-  OK: 200,
   OK_ADD: 201,
   OTHER_SEREVER_ERROR: 500,
   NotFoundError,

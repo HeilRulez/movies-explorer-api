@@ -3,19 +3,19 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Не должно быть постым'],
-    minlength: [2, 'Должно быть не менее {VALUE}'],
-    maxlength: [30, 'Должно быть не более {VALUE}'],
+    required: true,
+    minlength: 2,
+    maxlength: 30,
   },
   email: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
+    required: true,
     unique: true,
   },
   password: {
     type: String,
     select: false,
-    required: [true, 'Не должно быть постым'],
+    required: true,
   },
 });
 

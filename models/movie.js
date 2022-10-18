@@ -1,72 +1,56 @@
 const mongoose = require('mongoose');
-const { regExp } = require('../constants/constants');
 
 const ObjectID = mongoose.Schema.Types.ObjectId;
 
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
+    required: true,
   },
   director: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
+    required: true,
   },
   duration: {
     type: Number,
-    required: [true, 'Не должно быть пустым'],
+    required: true,
   },
   year: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
+    required: true,
   },
   description: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
+    required: true,
   },
   image: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
-    validate: {
-      validator(v) {
-        return regExp.link.test(v);
-      },
-    },
+    required: true,
   },
   trailerLink: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
-    validate: {
-      validator(v) {
-        return regExp.link.test(v);
-      },
-    },
+    required: true,
   },
   thumbnail: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
-    validate: {
-      validator(v) {
-        return regExp.link.test(v);
-      },
-    },
+    required: true,
   },
   owner: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
+    required: true,
   },
   movieId: {
     type: ObjectID,
     ref: 'movie',
-    required: [true, 'Не должно быть пустым'],
+    required: true,
   },
   nameRU: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
+    required: true,
   },
   nameEN: {
     type: String,
-    required: [true, 'Не должно быть пустым'],
+    required: true,
   },
 });
 
