@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const { jwtSecret } = require('../configApp');
@@ -43,7 +43,7 @@ module.exports.createUser = async (req, res, next) => {
     const {
       name, email, password,
     } = req.body;
-    const pasHash = await bcrypt.hash(password, 10);
+    const pasHash = await bcryptjs.hash(password, 10);
     const user = await User.create({
       name, email, password: pasHash,
     });
@@ -67,7 +67,7 @@ module.exports.login = async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
       throw new UnauthorizedError(noValidLoginMessage);
-    } else if (!(await bcrypt.compare(password, user.password))) {
+    } else if (!(await bcryptjs.compare(password, user.password))) {
       throw new UnauthorizedError(noValidLoginMessage);
     } else {
       const token = await jwt.sign(
