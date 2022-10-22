@@ -42,7 +42,7 @@ module.exports.validCerateMovie = celebrate({
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().custom(validLink),
-    movieId: Joi.string().alphanum().hex().length(24),
+    movieId: Joi.number().required(),
   }),
 });
 
