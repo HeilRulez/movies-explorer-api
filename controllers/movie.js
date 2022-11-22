@@ -16,10 +16,10 @@ module.exports.getSaveMovie = async (req, res, next) => {
 };
 
 module.exports.cerateMovie = async (req, res, next) => {
-  const { movieId } = req.body;
+  const { id } = req.body;
   let movie;
   try {
-    movie = await Movie.findOne({ movieId });
+    movie = await Movie.findOne({ id });
     if (movie) {
       next(new ConflictError(conflictMovieMessage));
       return;
@@ -33,13 +33,13 @@ module.exports.cerateMovie = async (req, res, next) => {
 
 module.exports.delMovie = async (req, res, next) => {
   try {
-    const movie = await Movie.findById(req.params._id);
+    const movie = await Movie.findOne({ id: req.params._id });
     if (!movie) {
       throw new NotFoundError(notFoundMovieMessage);
     } else if (req.user._id !== movie.owner) {
       throw new ForbiddenError(forbiddenMessage);
     }
-    await Movie.findByIdAndDelete(req.params._id);
+    await Movie.findOneAndDelete({ id: req.params._id });
     res.send(movie);
   } catch (err) {
     if (err.name === 'CastError') {
