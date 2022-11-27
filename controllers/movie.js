@@ -26,13 +26,13 @@ module.exports.cerateMovie = async (req, res, next) => {
 
 module.exports.delMovie = async (req, res, next) => {
   try {
-    const movie = await Movie.findOne({ id: req.params._id });
+    const movie = await Movie.findOne({ movieId: req.params._id });
     if (!movie) {
       throw new NotFoundError(notFoundMovieMessage);
     } else if (req.user._id !== movie.owner) {
       throw new ForbiddenError(forbiddenMessage);
     }
-    await Movie.findOneAndDelete({ id: req.params._id });
+    await Movie.findOneAndDelete({ movieId: req.params._id });
     res.send(movie);
   } catch (err) {
     if (err.name === 'CastError') {
