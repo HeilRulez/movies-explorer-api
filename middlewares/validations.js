@@ -48,6 +48,6 @@ module.exports.validCerateMovie = celebrate({
 
 module.exports.validDelMovie = celebrate({
   params: Joi.object().keys({
-    _id: Joi.string().required(),
+    _id: Joi.number().required(),
   }),
 });
