@@ -1,9 +1,9 @@
 const Movie = require('../models/movie');
 const {
-  OK_ADD, BadRequestError, NotFoundError, ConflictError, ForbiddenError,
+  OK_ADD, BadRequestError, NotFoundError, ForbiddenError,
 } = require('../constants/statusCodes');
 const {
-  badRequestMessage, notFoundMovieMessage, conflictMovieMessage, forbiddenMessage,
+  badRequestMessage, notFoundMovieMessage, forbiddenMessage,
 } = require('../constants/messageErrorsRU');
 
 module.exports.getSaveMovie = async (req, res, next) => {
@@ -16,15 +16,8 @@ module.exports.getSaveMovie = async (req, res, next) => {
 };
 
 module.exports.cerateMovie = async (req, res, next) => {
-  const { movieId } = req.body;
-  let movie;
   try {
-    movie = await Movie.findOne({ movieId });
-    if (movie) {
-      next(new ConflictError(conflictMovieMessage));
-      return;
-    }
-    movie = await Movie.create({ ...req.body, owner: req.user._id });
+    const movie = await Movie.create({ ...req.body, owner: req.user._id });
     res.status(OK_ADD).send(movie);
   } catch (err) {
     next(err);

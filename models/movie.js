@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const ObjectID = mongoose.Schema.Types.ObjectId;
-
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
@@ -40,8 +38,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: ObjectID,
-    ref: 'movie',
+    type: String,
     required: true,
   },
   nameRU: {
