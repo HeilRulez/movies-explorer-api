@@ -1,9 +1,9 @@
 const Movie = require('../models/movie');
 const {
-  OK_ADD, BadRequestError, NotFoundError, ForbiddenError,
+  OK_ADD, BadRequestError, NotFoundError,
 } = require('../constants/statusCodes');
 const {
-  badRequestMessage, notFoundMovieMessage, forbiddenMessage,
+  badRequestMessage, notFoundMovieMessage,
 } = require('../constants/messageErrorsRU');
 
 module.exports.getSaveMovie = async (req, res, next) => {
@@ -26,14 +26,14 @@ module.exports.cerateMovie = async (req, res, next) => {
 
 module.exports.delMovie = async (req, res, next) => {
   try {
-    const movie = await Movie.findOne({ movieId: req.params._id });
+    const movie = await Movie.find({ movieId: req.params._id });
     if (!movie) {
       throw new NotFoundError(notFoundMovieMessage);
-    } else if (req.user._id !== movie.owner) {
-      throw new ForbiddenError(forbiddenMessage);
+    } else {
+      const itemMovie = movie.filter((item) => req.user._id === item.owner)[0];
+      await Movie.deleteOne(itemMovie);
+      res.send(itemMovie);
     }
-    await Movie.findOneAndDelete({ movieId: req.params._id });
-    res.send(movie);
   } catch (err) {
     if (err.name === 'CastError') {
       next(new BadRequestError(badRequestMessage));
